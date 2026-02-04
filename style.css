@@ -5,10 +5,10 @@ body{
     max-width: 500px;
     padding: 50px;
     margin: auto;
-    box-shadow: rgba(rgba(0, 0, 0, 0.2), 10px, 10px, 79px, 10px);
+    box-shadow: 10px 10px 79px 10px rgba(0, 0, 0, 0.2);
     background-color: white;
     border-radius: 10%;
-    border-color: black;
+    border: 3px solid black;
 }
 
 .form-group{
@@ -29,5 +29,7 @@ body{
     width: 300px;
     height: auto;
 }
-
+.sign-in-link{
+    padding-right: 30px;
+}
 

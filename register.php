@@ -43,8 +43,11 @@
         </div>
         <div class="form-btn">
             <input type="submit" name="submit" value="Register" class="btn btn-primary">
-        </div>    
+        </div><br>
     </form>
+    <div class="sign-in-link">
+            <a href="login.php" target="_self">Already have an account? Sign In.</a>
+        </div>
    </div>
 </body>
 </html>
@@ -62,15 +65,15 @@
         $hash = password_hash($password,PASSWORD_DEFAULT);
 
         if(empty($age)){
-            echo "Please enter a valid age!";
+            echo "<div class='alert alert-danger>'Please enter a valid age!</div>";
             exit();
         }
         if(empty($email)){
-            echo "Please enter a valid email!";
+            echo "<div class='alert alert-danger'>Please enter a valid email!</div>";
             exit();
         }
         if(strlen($password) < 8){
-            echo "Password must be at least 8 characters long!";
+            echo "<div class='alert alert-danger'>Password must be at least 8 characters long!</div>";
             exit();
         }
 
