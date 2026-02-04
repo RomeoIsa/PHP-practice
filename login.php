@@ -1,3 +1,6 @@
+<?php
+    include("database.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,5 +31,8 @@
 </body>
 </html>
 <?php
-
+    if(isset($_POST["submit"])){
+        $email = filter_input(INPUT_POST,"email", FILTER_VALIDATE_EMAIL);
+        $password = $_POST["password"];
+    }
 ?>
