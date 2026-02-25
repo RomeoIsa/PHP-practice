@@ -1,0 +1,33 @@
+body{
+    padding: 50px;
+}
+.container{
+    max-width: 500px;
+    padding: 50px;
+    margin: auto;
+    background-color: white;
+    
+}
+
+.form-group{
+    margin-top: auto;
+    margin-bottom: 5px;
+    border-color: black;
+}
+
+.form-btn{
+    margin-left: 20px;
+    
+}
+
+.container h2{
+    text-align: center;
+}
+.btn-primary{
+    width: 300px;
+    height: auto;
+}
+.sign-in-link{
+    padding-right: 30px;
+}
+
