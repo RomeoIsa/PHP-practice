@@ -1,33 +1,40 @@
 <?php
-    include("database.php");
+include("database.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sign Up</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="container shadow-sm rounded border">
-     <form action="register.php" method="post">
-        <h2>Sign Up </h2>
-        <div class="form-group">
-            <input type="text" name="fname" required class="form-control" placeholder="First Name"><br>
-        </div>
+        <a href="index.php" class="back-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
+            </svg>
+        </a>
+        <form action="register.php" method="post">
+            <h2>Sign Up </h2>
             <div class="form-group">
-            <input type="text" name="lname" required class="form-control" placeholder="Last Name"><br>
+                <input type="text" name="fname" required class="form-control" placeholder="First Name"><br>
             </div>
             <div class="form-group">
-            <input type="text" name="email" required class="form-control" placeholder="Email"><br>
+                <input type="text" name="lname" required class="form-control" placeholder="Last Name"><br>
             </div>
             <div class="form-group">
-            <input type="text" name="username" required class="form-control" placeholder="Username"><br>
+                <input type="text" name="email" required class="form-control" placeholder="Email"><br>
             </div>
             <div class="form-group">
-            <input type="number" name="age" required class="form-control" placeholder="Age"><br>
+                <input type="text" name="username" required class="form-control" placeholder="Username"><br>
+            </div>
+            <div class="form-group">
+                <input type="number" name="age" required class="form-control" placeholder="Age"><br>
             </div>
             <div class="form-group">
                 <label>Gender</label><br>
@@ -38,55 +45,54 @@
                     <option>Other</option>
                 </select>
             </div><br>
-        <div class="form-group">
-            <input type="password" name="password" required class="form-control"  placeholder="Password"><br>
-        </div>
-        <div class="form-btn">
-            <input type="submit" name="submit" value="Register" class="btn btn-primary">
-        </div><br>
-    </form>
-    <div class="sign-in-link text-centre">
+            <div class="form-group">
+                <input type="password" name="password" required class="form-control" placeholder="Password"><br>
+            </div>
+            <div class="form-btn">
+                <input type="submit" name="submit" value="Register" class="btn btn-primary">
+            </div><br>
+        </form>
+        <div class="sign-in-link text-centre">
             <a href="login.php" target="_self">Already have an account? Sign In.</a>
         </div>
-   </div>
+    </div>
 </body>
+
 </html>
 <?php
 
-    if(isset($_POST["submit"])){
-        $fname = filter_input(INPUT_POST,"fname", FILTER_SANITIZE_SPECIAL_CHARS);
-        $lname = filter_input(INPUT_POST,"lname", FILTER_SANITIZE_SPECIAL_CHARS);
-        $email = filter_input(INPUT_POST,"email", FILTER_VALIDATE_EMAIL);
-        $username = filter_input(INPUT_POST,"username", FILTER_SANITIZE_SPECIAL_CHARS);
-        $age = filter_input(INPUT_POST,"age", FILTER_SANITIZE_NUMBER_INT,FILTER_VALIDATE_INT);
-        $gender = $_POST["gender"];
-        $password = $_POST["password"];
+if (isset($_POST["submit"])) {
+    $fname = filter_input(INPUT_POST, "fname", FILTER_SANITIZE_SPECIAL_CHARS);
+    $lname = filter_input(INPUT_POST, "lname", FILTER_SANITIZE_SPECIAL_CHARS);
+    $email = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
+    $username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_SPECIAL_CHARS);
+    $age = filter_input(INPUT_POST, "age", FILTER_SANITIZE_NUMBER_INT, FILTER_VALIDATE_INT);
+    $gender = $_POST["gender"];
+    $password = $_POST["password"];
 
-        $hash = password_hash($password,PASSWORD_DEFAULT);
+    $hash = password_hash($password, PASSWORD_DEFAULT);
 
-        if(empty($age)){
-            echo "<div class='alert alert-danger>'Please enter a valid age!</div>";
-            exit();
-        }
-        if(empty($email)){
-            echo "<div class='alert alert-danger'>Please enter a valid email!</div>";
-            exit();
-        }
-        if(strlen($password) < 8){
-            echo "<div class='alert alert-danger'>Password must be at least 8 characters long!</div>";
-            exit();
-        }
+    if (empty($age)) {
+        echo "<div class='alert alert-danger>'Please enter a valid age!</div>";
+        exit();
+    }
+    if (empty($email)) {
+        echo "<div class='alert alert-danger'>Please enter a valid email!</div>";
+        exit();
+    }
+    if (strlen($password) < 8) {
+        echo "<div class='alert alert-danger'>Password must be at least 8 characters long!</div>";
+        exit();
+    }
 
-        $sql = "INSERT INTO user (fname, lname, email, username, age, gender, password) 
+    $sql = "INSERT INTO user (fname, lname, email, username, age, gender, password) 
                 VALUES('$fname','$lname','$email','$username','$age','$gender','$hash')";
 
-        try{
-            mysqli_query($conn, $sql);
-            echo "<div class='alert alertt-success'>User is registered successfully!</div>";
-        }
-        catch(mysqli_sql_exception){
-            echo "Could not register user";
-        }
+    try {
+        mysqli_query($conn, $sql);
+        echo "<div class='alert alertt-success'>User is registered successfully!</div>";
+    } catch (mysqli_sql_exception) {
+        echo "Could not register user";
     }
+}
 ?>
-

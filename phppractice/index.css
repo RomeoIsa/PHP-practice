@@ -1,3 +1,11 @@
 .section{
     margin: 5;
 }
+
+nav a.active{
+    color: primary;
+}
+
+#pricing{
+    margin-top: -120px;
+}
